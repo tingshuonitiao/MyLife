@@ -16,14 +16,14 @@ import com.mylife.tsnt.manager.ThreadManager;
 public class SplashActivity extends BaseActivity {
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
-        super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_splash);
-        init();
+        super.onCreate(savedInstanceState);
         gotoMain();
     }
 
-    private void init() {
-        mContext = SplashActivity.this;
+    @Override
+    public void initData() {
+        mContext = this;
     }
 
     //自动跳转到主页
@@ -32,7 +32,7 @@ public class SplashActivity extends BaseActivity {
             @Override
             public void run() {
                 SystemClock.sleep(3000);
-                startActivity(new Intent(mContext, WeatherActivity.class));
+                startActivity(new Intent(mContext, TranslateActivity.class));
                 finish();
             }
         });

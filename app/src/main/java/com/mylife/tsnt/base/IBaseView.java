@@ -1,7 +1,7 @@
 package com.mylife.tsnt.base;
 
 /**
- * Created by Joinwe on 2017/3/14.
+ * Created by ting说你跳 on 2017/3/14.
  */
 
 public interface IBaseView {

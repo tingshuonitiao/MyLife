@@ -31,6 +31,7 @@ public class BaseActivity extends AppCompatActivity implements IBaseView {
     public void onBackPressed() {
         super.onBackPressed();
         ToastUtil.cancelToast();
+        finish();
     }
 
     @Override
