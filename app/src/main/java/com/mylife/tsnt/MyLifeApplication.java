@@ -1,4 +1,4 @@
-package com.mylife.tsnt.common;
+package com.mylife.tsnt;
 
 import android.app.Application;
 import android.content.Context;

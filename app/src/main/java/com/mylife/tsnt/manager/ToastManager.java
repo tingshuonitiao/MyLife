@@ -1,4 +1,4 @@
-package com.mylife.tsnt.util;
+package com.mylife.tsnt.manager;
 
 import android.content.Context;
 import android.view.Gravity;
@@ -8,7 +8,7 @@ import android.widget.Toast;
  * Created by ting说你跳 on 2017/3/13.
  */
 
-public class ToastUtil {
+public class ToastManager {
     private static String oldMsg;
     protected static Toast toast = null;
     private static long oneTime = 0;

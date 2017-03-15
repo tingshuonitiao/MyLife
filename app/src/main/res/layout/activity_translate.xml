@@ -4,10 +4,10 @@
     android:id="@+id/activity_weather"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context="com.mylife.tsnt.ui.activity.TranslateActivity">
+    tools:context="com.mylife.tsnt.translate.view.TranslateActivity">
 
     <TextView
-        android:id="@+id/weather"
+        android:id="@+id/result"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_centerHorizontal="true"
@@ -19,7 +19,7 @@
         android:id="@+id/input"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_below="@+id/weather"
+        android:layout_below="@+id/result"
         android:layout_centerHorizontal="true"
         android:layout_marginTop="30dp"
         android:hint="Please input city" />

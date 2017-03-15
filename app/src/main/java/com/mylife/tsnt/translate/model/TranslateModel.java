@@ -1,10 +1,8 @@
-package com.mylife.tsnt.mvp.model;
+package com.mylife.tsnt.translate.model;
 
 import com.mylife.tsnt.R;
-import com.mylife.tsnt.TranslationService;
-import com.mylife.tsnt.bean.YoudaoFanyiBean;
-import com.mylife.tsnt.common.MyLifeApplication;
-import com.mylife.tsnt.mvp.presenter.ITranslatePresenter;
+import com.mylife.tsnt.MyLifeApplication;
+import com.mylife.tsnt.translate.presenter.ITranslatePresenter;
 
 import retrofit2.Call;
 import retrofit2.Callback;
@@ -17,10 +15,10 @@ import retrofit2.converter.gson.GsonConverterFactory;
  */
 
 public class TranslateModel implements ITranslateModel {
-    private ITranslatePresenter mWeatherPresenter;
+    private ITranslatePresenter mTranslatePresenter;
 
-    public TranslateModel(ITranslatePresenter weatherPresenter) {
-        mWeatherPresenter = weatherPresenter;
+    public TranslateModel(ITranslatePresenter translatePresenter) {
+        mTranslatePresenter = translatePresenter;
     }
 
     @Override
@@ -33,36 +31,35 @@ public class TranslateModel implements ITranslateModel {
                 .baseUrl(url)
                 .addConverterFactory(GsonConverterFactory.create())
                 .build();
-        TranslationService weatherService = retrofit.create(TranslationService.class);
-        Call<YoudaoFanyiBean> call = weatherService.queryWeather(keyfrom, key, "data", "json", "1.1", city, null);
-        call.enqueue(new Callback<YoudaoFanyiBean>() {
+        TranslateService translateService = retrofit.create(TranslateService.class);
+        Call<TranslateBean> call = translateService.queryTranslation(keyfrom, key, "data", "json", "1.1", city, null);
+        call.enqueue(new Callback<TranslateBean>() {
             @Override
-            public void onResponse(Call<YoudaoFanyiBean> call, Response<YoudaoFanyiBean> response) {
+            public void onResponse(Call<TranslateBean> call, Response<TranslateBean> response) {
                 if (response != null && response.body() != null) {
                     if (response.body().getErrorCode() == 0) {
                         if (checkData(response)) {
-                            mWeatherPresenter.Succeed(response.body());
+                            mTranslatePresenter.loadSucceed(response.body());
                         } else {
-                            mWeatherPresenter.Fail(MyLifeApplication.sContext.getString(R.string.getDataError));
+                            mTranslatePresenter.loadFail(MyLifeApplication.sContext.getString(R.string.getDataError));
                         }
                     } else {
-                        mWeatherPresenter.Fail(getErrorMessage(response.body().getErrorCode()));
+                        mTranslatePresenter.loadFail(getErrorMessage(response.body().getErrorCode()));
                     }
                 } else {
-                    mWeatherPresenter.Fail(MyLifeApplication.sContext.getString(R.string.getDataError));
+                    mTranslatePresenter.loadFail(MyLifeApplication.sContext.getString(R.string.getDataError));
                 }
             }
 
             @Override
-            public void onFailure(Call<YoudaoFanyiBean> call, Throwable t) {
-                mWeatherPresenter.Fail(MyLifeApplication.sContext.getString(R.string.networkFailure));
+            public void onFailure(Call<TranslateBean> call, Throwable t) {
+                mTranslatePresenter.loadFail(MyLifeApplication.sContext.getString(R.string.networkFailure));
             }
         });
     }
 
-    @Override
-    public <T> boolean checkData(T response) {
-        if (((Response<YoudaoFanyiBean>) response).body().getTranslation() != null && ((Response<YoudaoFanyiBean>) response).body().getTranslation().size() != 0) {
+    public boolean checkData(Response<TranslateBean> response) {
+        if (response.body().getTranslation() != null && response.body().getTranslation().size() != 0) {
             return true;
         }
         return false;

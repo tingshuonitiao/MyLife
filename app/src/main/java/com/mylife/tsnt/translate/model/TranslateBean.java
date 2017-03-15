@@ -1,4 +1,4 @@
-package com.mylife.tsnt.bean;
+package com.mylife.tsnt.translate.model;
 
 import java.util.List;
 
@@ -6,7 +6,7 @@ import java.util.List;
  * Created by ting说你跳 on 2017/3/14.
  */
 
-public class YoudaoFanyiBean {
+public class TranslateBean {
     private BasicBean basic;
 
     public static class BasicBean {
