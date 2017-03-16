@@ -1,14 +1,14 @@
 package com.mylife.tsnt.translate.model;
 
-import com.mylife.tsnt.R;
 import com.mylife.tsnt.MyLifeApplication;
+import com.mylife.tsnt.R;
+import com.mylife.tsnt.network.Netwrok;
+import com.mylife.tsnt.network.api.TranslateApi;
 import com.mylife.tsnt.translate.presenter.ITranslatePresenter;
 
 import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
-import retrofit2.Retrofit;
-import retrofit2.converter.gson.GsonConverterFactory;
 
 /**
  * Created by ting说你跳 on 2017/3/13.
@@ -24,15 +24,10 @@ public class TranslateModel implements ITranslateModel {
     @Override
     public void loadTranslation(String city) {
         //String s = "http://fanyi.youdao.com/openapi.do?keyfrom=MyLife&key=1976408344&type=data&doctype=json&version=1.1&q=good";
-        String url = "http://fanyi.youdao.com";
+        TranslateApi translateApi = Netwrok.getTranslateApi();
         String keyfrom = "MyLife";
         String key = "1976408344";
-        Retrofit retrofit = new Retrofit.Builder()
-                .baseUrl(url)
-                .addConverterFactory(GsonConverterFactory.create())
-                .build();
-        TranslateService translateService = retrofit.create(TranslateService.class);
-        Call<TranslateBean> call = translateService.queryTranslation(keyfrom, key, "data", "json", "1.1", city, null);
+        Call<TranslateBean> call = translateApi.queryTranslation(keyfrom, key, "data", "json", "1.1", city, null);
         call.enqueue(new Callback<TranslateBean>() {
             @Override
             public void onResponse(Call<TranslateBean> call, Response<TranslateBean> response) {
