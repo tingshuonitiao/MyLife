@@ -30,7 +30,7 @@ public class TranslateActivity extends BaseActivity<TranslatePresenter> implemen
     }
 
     @Override
-    public TranslatePresenter createPresenter() {
+    public TranslatePresenter setPresenter() {
         return new TranslatePresenter(this);
     }
 
@@ -45,7 +45,6 @@ public class TranslateActivity extends BaseActivity<TranslatePresenter> implemen
 
     @Override
     public void initData() {
-        mContext = this;
     }
 
     @Override

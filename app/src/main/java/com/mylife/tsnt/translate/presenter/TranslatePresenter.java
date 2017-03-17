@@ -30,9 +30,14 @@ public class TranslatePresenter implements ITranslatePresenter, IBasePresenter<I
     }
 
     @Override
-    public void loadTranslation(String city) {
+    public boolean isViewAttached() {
+        return mITranslateView != null;
+    }
+
+    @Override
+    public void loadTranslation(String words) {
         if (isViewAttached()) {
-            mTranslateModel.loadTranslation(city);
+            mTranslateModel.loadTranslation(words);
         }
     }
 
@@ -48,9 +53,5 @@ public class TranslatePresenter implements ITranslatePresenter, IBasePresenter<I
         if (isViewAttached()) {
             mITranslateView.loadFail(errorMessage);
         }
-    }
-
-    private boolean isViewAttached() {
-        return mITranslateView != null;
     }
 }
