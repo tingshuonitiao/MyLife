@@ -18,13 +18,14 @@ public abstract class BaseActivity<P extends IBasePresenter> extends AppCompatAc
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        mPresenter = setPresenter();
+        mPresenter.attachView(this);
+        mContext = this;
         initView();
         initData();
-        mPresenter = createPresenter();
-        mPresenter.attachView(this);
     }
 
-    public abstract P createPresenter();
+    public abstract P setPresenter();
 
     @Override
     public void initView() {

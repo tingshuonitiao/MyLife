@@ -2,6 +2,7 @@ package com.mylife.tsnt.translate.model;
 
 import com.mylife.tsnt.MyLifeApplication;
 import com.mylife.tsnt.R;
+import com.mylife.tsnt.common.Config;
 import com.mylife.tsnt.network.Netwrok;
 import com.mylife.tsnt.network.api.TranslateApi;
 import com.mylife.tsnt.translate.presenter.ITranslatePresenter;
@@ -22,16 +23,13 @@ public class TranslateModel implements ITranslateModel {
     }
 
     @Override
-    public void loadTranslation(String city) {
-        //String s = "http://fanyi.youdao.com/openapi.do?keyfrom=MyLife&key=1976408344&type=data&doctype=json&version=1.1&q=good";
+    public void loadTranslation(String words) {
         TranslateApi translateApi = Netwrok.getTranslateApi();
-        String keyfrom = "MyLife";
-        String key = "1976408344";
-        Call<TranslateBean> call = translateApi.queryTranslation(keyfrom, key, "data", "json", "1.1", city, null);
+        Call<TranslateBean> call = translateApi.queryTranslation(Config.YOUDAO_KEYFORM, Config.YOUDAO_KEY, "data", "json", "1.1", words, null);
         call.enqueue(new Callback<TranslateBean>() {
             @Override
             public void onResponse(Call<TranslateBean> call, Response<TranslateBean> response) {
-                if (response != null && response.body() != null) {
+                if (response.isSuccessful() && response.body() != null) {
                     if (response.body().getErrorCode() == 0) {
                         if (checkData(response)) {
                             mTranslatePresenter.loadSucceed(response.body());
