@@ -1,16 +1,17 @@
 package com.mylife.tsnt.translate.view;
 
 import android.os.Bundle;
+import android.support.v7.widget.CardView;
 import android.view.View;
-import android.widget.Button;
 import android.widget.EditText;
+import android.widget.LinearLayout;
 import android.widget.TextView;
 
 import com.mylife.tsnt.R;
 import com.mylife.tsnt.base.BaseActivity;
+import com.mylife.tsnt.manager.ToastManager;
 import com.mylife.tsnt.translate.model.TranslateBean;
 import com.mylife.tsnt.translate.presenter.TranslatePresenter;
-import com.mylife.tsnt.manager.ToastManager;
 
 import java.util.List;
 
@@ -19,9 +20,10 @@ import java.util.List;
  */
 
 public class TranslateActivity extends BaseActivity<TranslatePresenter> implements ITranslateView, View.OnClickListener {
-    private TextView tvResult;
-    private EditText etInput;
-    private Button btnQuery;
+    private TextView     tvResult;
+    private EditText     etInput;
+    private LinearLayout btnQuery;
+    private CardView     cvResult;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -36,9 +38,10 @@ public class TranslateActivity extends BaseActivity<TranslatePresenter> implemen
 
     @Override
     public void initView() {
+        cvResult = (CardView) findViewById(R.id.cv_result);
         tvResult = (TextView) findViewById(R.id.result);
         etInput = (EditText) findViewById(R.id.input);
-        btnQuery = (Button) findViewById(R.id.query);
+        btnQuery = (LinearLayout) findViewById(R.id.query);
 
         btnQuery.setOnClickListener(this);
     }
@@ -56,6 +59,8 @@ public class TranslateActivity extends BaseActivity<TranslatePresenter> implemen
             buffer.append(translations.get(i) + " ");
         }
         tvResult.setText(buffer);
+        etInput.setText("");
+        cvResult.setVisibility(View.VISIBLE);
     }
 
     @Override

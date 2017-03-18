@@ -27,7 +27,7 @@ public class SplashActivity extends AppCompatActivity {
         ThreadManager.runOnThread(new Runnable() {
             @Override
             public void run() {
-                SystemClock.sleep(3000);
+                SystemClock.sleep(1000);
                 startActivity(new Intent(SplashActivity.this, TranslateActivity.class));
                 finish();
             }
