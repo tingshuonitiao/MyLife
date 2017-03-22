@@ -9,6 +9,8 @@ import com.mylife.tsnt.translate.model.TranslateBean;
 public interface ITranslatePresenter {
     void loadTranslation(String city);
 
+    void checkData(TranslateBean translateBean);
+
     void loadSucceed(TranslateBean translateBean);
 
     void loadFail(String errorMessage);

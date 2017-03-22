@@ -39,8 +39,7 @@ public abstract class BaseActivity<P extends IBasePresenter> extends AppCompatAc
 
     @Override
     public void onBackPressed() {
-        super.onBackPressed();
-        onDestroy();
+        finish();
     }
 
     @Override

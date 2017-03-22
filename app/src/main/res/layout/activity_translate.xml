@@ -34,7 +34,7 @@
             android:layout_height="wrap_content"
             android:orientation="vertical">
             <LinearLayout
-                android:id="@+id/query"
+                android:id="@+id/ll_query"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_below="@+id/title"
@@ -42,17 +42,19 @@
                 android:orientation="horizontal"
                 android:padding="10dp">
                 <TextView
+                    android:id="@+id/tv_query"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_gravity="center_vertical"
-                    android:text="query "
+                    android:text="Query "
                     android:textColor="#999999"
                     android:textSize="18dp"/>
                 <ImageView
+                    android:id="@+id/imv_query"
                     android:layout_width="18dp"
                     android:layout_height="18dp"
                     android:layout_gravity="center_vertical"
-                    android:src="@mipmap/ic_launcher"/>
+                    android:src="@mipmap/arrow_toright_gray"/>
             </LinearLayout>
 
             <View
@@ -61,7 +63,7 @@
                 android:background="#DDDDDD"/>
 
             <EditText
-                android:id="@+id/input"
+                android:id="@+id/et_input"
                 android:layout_width="match_parent"
                 android:layout_height="150dp"
                 android:layout_centerHorizontal="true"
@@ -100,7 +102,7 @@
                     android:textSize="16dp"/>
 
                 <TextView
-                    android:id="@+id/result"
+                    android:id="@+id/tv_result"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_marginTop="10dp"

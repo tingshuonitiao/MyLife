@@ -30,15 +30,7 @@ public class TranslateModel implements ITranslateModel {
             @Override
             public void onResponse(Call<TranslateBean> call, Response<TranslateBean> response) {
                 if (response.isSuccessful() && response.body() != null) {
-                    if (response.body().getErrorCode() == 0) {
-                        if (checkData(response)) {
-                            mTranslatePresenter.loadSucceed(response.body());
-                        } else {
-                            mTranslatePresenter.loadFail(MyLifeApplication.sContext.getString(R.string.getDataError));
-                        }
-                    } else {
-                        mTranslatePresenter.loadFail(getErrorMessage(response.body().getErrorCode()));
-                    }
+                    mTranslatePresenter.checkData(response.body());
                 } else {
                     mTranslatePresenter.loadFail(MyLifeApplication.sContext.getString(R.string.getDataError));
                 }
@@ -49,28 +41,5 @@ public class TranslateModel implements ITranslateModel {
                 mTranslatePresenter.loadFail(MyLifeApplication.sContext.getString(R.string.networkFailure));
             }
         });
-    }
-
-    public boolean checkData(Response<TranslateBean> response) {
-        if (response.body().getTranslation() != null && response.body().getTranslation().size() != 0) {
-            return true;
-        }
-        return false;
-    }
-
-    private String getErrorMessage(int errorCode) {
-        switch (errorCode) {
-            case 20:
-                return "要翻译的文本过长";
-            case 30:
-                return "无法进行有效的翻译";
-            case 40:
-                return "不支持的语言类型";
-            case 50:
-                return "无效的key";
-            case 60:
-                return "无词典结果，仅在获取词典结果生效";
-        }
-        return MyLifeApplication.sContext.getString(R.string.getDataError);
     }
 }
